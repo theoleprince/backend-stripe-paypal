@@ -30,12 +30,12 @@ public class LicenseService {
         license.setNbrUser(nbrUser);
         license.setExpiryDate(expiryDate);
         license.setActivated(false);
-
+        License li1 = licenseRepository.save(license);
         // Chiffrer l'objet License en clé de licence
-        String licenseKey = aesService.encrypt(license);
+        String licenseKey = aesService.encrypt(li1);
 
-        license.setLicenseKey(licenseKey);
-        return licenseRepository.save(license);
+        li1.setLicenseKey(licenseKey);
+        return licenseRepository.save(li1);
     }
 
     // Valider une licence
