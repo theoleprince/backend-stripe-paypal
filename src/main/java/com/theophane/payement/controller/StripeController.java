@@ -1,7 +1,12 @@
 package com.theophane.payement.controller;
 
+import com.google.gson.JsonObject;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
+import com.theophane.payement.services.OrangeMoneyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -9,9 +14,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/stripe")
-@CrossOrigin(origins = "*")  // Permet l'accès depuis Angular
+//@CrossOrigin(origins = "*")  // Permet l'accès depuis Angular
 public class StripeController {
-
+    @Autowired
+    private OrangeMoneyService orangeMoneyService;
     @PostMapping("/create-checkout-session")
     public Map<String, String> createCheckoutSession(@RequestBody Map<String, Object> request) {
         try {
